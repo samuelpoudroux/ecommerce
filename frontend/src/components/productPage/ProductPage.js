@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Products from './products/Product';
 import Filter from '../Filter';
 import Basket from '../Basket';
+import { connect } from 'react-redux'
 
 
 class ProductsPage extends Component {
@@ -10,7 +11,7 @@ class ProductsPage extends Component {
     super();
     this.state = { size: '', sort: '', cartItems: [], products: [], filteredProducts: [] };
   }
- 
+
 
   handleRemoveFromCart = (e, product) => {
     this.setState(state => {
@@ -20,6 +21,17 @@ class ProductsPage extends Component {
     })
   }
 
+  componentDidMount() {
+    console.log(this.props.auth.isAuthenticated)
+    if(!this.props.auth.isAuthenticated) {
+        this.props.history.push('/');
+    }
+
+}
+  login() {
+    this.props.history.push('/login')
+  }
+
   render() {
     return (
       <div className="container-fluid">
@@ -27,12 +39,12 @@ class ProductsPage extends Component {
         <hr />
         <div className="row">
           <div className="col-md-9">
-            <Filter /> 
+            <Filter />
             <hr />
-            <Products/>
+            <Products />
           </div>
           <div className="col-md-3">
-            <Basket/>
+            <Basket />
           </div>
 
         </div>
@@ -42,4 +54,9 @@ class ProductsPage extends Component {
   }
 }
 
-export default ProductsPage;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  user: state.auth.user
+})
+
+export default connect(mapStateToProps, null)(ProductsPage);

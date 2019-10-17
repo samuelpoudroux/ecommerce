@@ -8,11 +8,10 @@ import jwt_decode from 'jwt-decode';
 import setAuthToken from './setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authentication';
 import ProductPage from './components/productPage/ProductPage'
-import Navbar from './components/Navbar';
+import Menu from './components/Navbar';
 import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 if(localStorage.jwtToken) {
@@ -32,8 +31,8 @@ class App extends Component {
     return (
       <Provider store = { store }>
         <Router>
-            <div>
-              <Navbar />
+            <div   style={{height: '100vh'}}>
+              <Menu />
                 <Route exact path="/" component={ Home } />
                 <div className="container-fluid">
                   <Route exact path="/register" component={ Register } />
