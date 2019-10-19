@@ -6,7 +6,8 @@ import classnames from 'classnames';
 import { Progress } from 'semantic-ui-react';
 import { Button } from 'react-bootstrap'
 import { form, input } from '../styles.js';
-import './popup.css'
+import './popup.css';
+import axios from 'axios'
 
 
 class Popup extends Component {
@@ -27,12 +28,14 @@ class Popup extends Component {
             errors: {}
         }
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.fileSelectHandler = this.fileSelectHandler.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.updateProgessBar = this.updateProgessBar.bind(this);
         this.checkCompleted = this.checkCompleted.bind(this);
         this.addSize = this.addSize.bind(this);
         this.postProduct = this.postProduct.bind(this);
         this.renderSize = this.renderSize.bind(this);
+        this.showPopupConfirmation = this.showPopupConfirmation.bind(this);
     }
 
     handleInputChange(e) {
@@ -41,33 +44,34 @@ class Popup extends Component {
         })
     }
 
-    postProduct() {
-        const product = {
-            sku: this.state.sku,
-            title: this.state.title,
-            description: this.state.description,
-            availableSizes: this.state.availableSizes,
-            price: this.state.price,
-        }
-
-        console.log(product)
-
-        fetch('http://localhost:5000/product', {
-            method: 'post',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(product)
-        }).then(function (response) {
-            console.log(response)
-            return response.json();
-        }).then(function (data) {
-            console.log(data)
-            this.setState({
-                showPopupConfirmation: true
-            })
-        });
+    fileSelectHandler(e) {
+        this.setState({
+            image: e.target.files[0]
+        })
     }
+
+    showPopupConfirmation(){
+        this.setState({
+            showPopupConfirmation: true
+        })
+    }
+
+    postProduct() {
+        const p = new FormData()
+        p.append('productImage', this.state.image, this.state.image.name)
+        p.append('title', this.state.title)
+        p.append('description', this.state.description)
+        p.append('availableSizes', this.state.availableSize)
+        p.append('price', this.state.price)
+        axios.post('http://localhost:5000/product', p)
+            .then(function (response) {
+                if(response){
+                    console.log(response)
+                   this.showPopupConfirmation()
+                };
+            })
+    }
+
     handleSubmit(e) {
         console.log('post')
         e.preventDefault();
@@ -120,11 +124,10 @@ class Popup extends Component {
                 <form onSubmit={this.handleSubmit} style={form} className='popup_inner'>
                     <h1>Créer votre produit</h1>
                     <div className="form-group" style={{ marginTop: '10px', width: '50%', display: 'flex', justifyContent: 'center' }}>
-                        <label for="avatar">Choisissez une image:</label>
-
                         <input type="file"
-                            id="avatar" name="avatar"
+                            id="avatar" name="image"
                             accept="image/png, image/jpeg"
+                            onChange={this.fileSelectHandler}
                         />
                     </div>
                     <div className="form-group" style={{ marginTop: '10px', width: '50%', display: 'flex', justifyContent: 'center' }}>

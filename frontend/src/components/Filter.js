@@ -9,7 +9,7 @@ import Popup from './productPage/popupCreation'
 class Filter extends Component {
     constructor() {
         super();
-        this.state = { showPopup: true };
+        this.state = { showPopup: false };
 
         this.showPopup = this.showPopup.bind(this)
     }

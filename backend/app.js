@@ -6,9 +6,9 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const config = require('./db');
 var cors = require('cors')
- 
 const users = require('./routes/user'); 
 const product = require('./routes/product')
+
 
 mongoose.connect(config.DB, {useUnifiedTopology: true, useNewUrlParser: true}).then(
     () => {console.log('Database is connected') },
@@ -19,7 +19,8 @@ mongoose.connect(config.DB, {useUnifiedTopology: true, useNewUrlParser: true}).t
 const app = express();
 app.use(passport.initialize());
 require('./passport')(passport);
-app.use(cors())
+app.use(cors()
+)
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

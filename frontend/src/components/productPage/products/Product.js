@@ -18,10 +18,10 @@ class Products extends Component {
             <div className="col-md-4" key={product.id}>
                 <div className="thumbnail text-center">
                     <a href={`#${product.id}`}onClick={()=>this.props.addToCart(this.props.cartItems, product)}>
-                        <img src={`products/${product.sku}_2.jpg`} alt={product.title} />
+                        <img src={`products/${product.image}`} alt={product.title} style={{height: '100px', width: '100px'}} />
                         <p>{product.title}</p>                        
                     </a>
-                    <b>{util.formatCurrency(product.price)}</b>
+                    {/* <b>{util.formatCurrency(product.price)}</b> */}
                     <button className="btn btn-primary"onClick={()=>this.props.addToCart(this.props.cartItems, product)}>Ajouter au panier</button>
                 </div>
             </div>

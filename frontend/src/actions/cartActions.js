@@ -7,7 +7,8 @@ export const addToCart = (items, product) => (dispatch) => {
     let productAlreadyInCart = false;
   
     cartItems.forEach(cp => {
-      if (cp.id === product.id) {
+      console.log(cp.id+ ' ' + product.id)
+      if (cp._id === product._id) {
         cp.count += 1;
         productAlreadyInCart = true;
       }

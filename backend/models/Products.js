@@ -5,9 +5,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema({
-    sku: {
-        type: String,
-    },
     title: {
         type: String,
     },
@@ -21,11 +18,10 @@ const ProductSchema = new Schema({
         type: Number,
     },
 
-    isFreeShipping : {
-        type : Boolean,
+    image:{
+        type: String
     }
-
-
+   
 });
 
 const Product = mongoose.model('product', ProductSchema);
