@@ -1,8 +1,8 @@
 // App.js
 import React, { Component } from 'react';
 import Products from './products/Product';
-import Filter from '../Filter';
-import Basket from '../Basket';
+import Filter from './Filter';
+import Basket from '../basket/Basket';
 import { connect } from 'react-redux'
 
 

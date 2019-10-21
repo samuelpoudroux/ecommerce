@@ -1,10 +1,10 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { filterProducts, sortProducts } from '../actions/productAction'
+import { filterProducts, sortProducts } from '../../actions/productAction'
 import AddButton from '@material-ui/icons/AddCircleOutline';
-import Can from './can'
-import Popup from './productPage/popupCreation'
+import Can from '../can'
+import Popup from './popupCreation'
 
 class Filter extends Component {
     constructor() {

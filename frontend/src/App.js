@@ -13,6 +13,8 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Payement from './components/paimentPackage/payment';
+
 
 if(localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
@@ -38,6 +40,7 @@ class App extends Component {
                   <Route exact path="/register" component={ Register } />
                   <Route exact path="/login" component={ Login } />
                   <Route exact path="/product" component={ ProductPage } />
+                  <Route exact path="/payment" component={Payement } />
                 </div>
             </div>
           </Router>

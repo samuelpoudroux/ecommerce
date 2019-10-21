@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../actions/authentication';
 import { withRouter } from 'react-router-dom';
 import { Form, Nav, Button, FormControl, Navbar, Col } from 'react-bootstrap';
-import SmallBasket from './SmallBasket';
+import SmallBasket from './basket/SmallBasket';
 import Can from './can'
 
 class Menu extends Component {
