@@ -28,7 +28,8 @@ export const addToCart = (items, product) => (dispatch) => {
   }
   
   export const removeFromCart = (items, product) => (dispatch) => {
-    const cartItems = items.slice().filter(a => a.id !== product.id);
+    console.log(items)
+    const cartItems = items.slice().filter(a => a._id !== product._id);
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
     return dispatch({
