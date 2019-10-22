@@ -3,6 +3,7 @@ import {CardNumberElement, CardExpiryElement,injectStripe,CardCVCElement} from '
 import Alert from '../alert';
 import queryString from 'query-string';
 import { instanceOf } from 'prop-types';
+import axios from 'axios';
 
 
 class CheckoutForm extends Component {
@@ -46,10 +47,28 @@ class CheckoutForm extends Component {
       });
   }
 
+  sendMail(mailBody){
+    axios.post('http://localhost:5000/send-email', mailBody)
+    .then(res => {
+      console.log(res)
+    }).catch(error => console.log(error))
+  }
+
+  mail(){
+    return <p>aloup</p>
+  }
+
   stripeCreateCharge(token, amount, userName) {
     const params = { token: token.id, amount: amount, info:userName};
     const qParams = queryString.stringify(params);
     const url = ['/charge', qParams].join('?');
+
+    const mailBody={
+      product: this.props.cartItems,
+      clientName:this.props.user.name,
+      clientId: this.props.user.id
+    }
+    
 
     fetch(url)
       .then(response => response.json())
@@ -61,11 +80,15 @@ class CheckoutForm extends Component {
           throw val.message;
         }
       })
-      .then(success => this.setState({alertMessage: success, alertStyle: 'success'}))
+      .then(success => {
+        this.setState({alertMessage: success, alertStyle: 'success'})
+        this.sendMail(mailBody)
+      })
       .catch(error => this.setState({alertMessage: error, alertStyle: 'danger'}));
   }
 
   render() {
+    console.log(this.props.cartItems)
     return (
         <form onSubmit={this.handleSubmit}>
               <Alert msg={this.state.alertMessage} style={this.state.alertStyle} />
