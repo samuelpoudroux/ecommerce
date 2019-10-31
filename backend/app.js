@@ -89,7 +89,7 @@ app.post('/send-email', function (req, res) {
     to: 'to@email.com',         // List of recipients
     subject: `commande client ${clientId}`, // Subject line
     text: ``,
-    html: `<p>Monsieur ${clientName} dont l'id est ${clientId} à commandé ses produits :</p>
+    html: `<p>Monsieur ${clientName} dont l'id est ${clientId} à commandé ces produits :</p>
               <ul>${product}</ul>`, // html body
   };
 

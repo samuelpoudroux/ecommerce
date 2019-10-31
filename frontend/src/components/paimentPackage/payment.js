@@ -7,7 +7,7 @@ class Payement extends Component {
     return (
       <StripeProvider apiKey="pk_test_ghAvpU25OhVxsXzCeGxhJZpN00lOxHrvTL">
         <div className="example">
-          <h1>React Stripe Elements Example</h1>
+          <h1>Formualaire de paiment</h1>
           <Elements>
             <PaymentForm/>
           </Elements>
